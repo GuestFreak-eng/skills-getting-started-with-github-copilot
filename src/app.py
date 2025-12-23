@@ -38,10 +38,9 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
-    }Add 2 more sports related activities, 2 more artistic
-activities, and 2 more intellectual activities.
-
+    }
 }
+# Add 2 more sports related activities, 2 more artistic activities, and 2 more intellectual activities.
 
 
 @app.get("/")
@@ -58,12 +57,15 @@ def get_activities():
 def signup_for_activity(activity_name: str, email: str):
     """Sign up a student for an activity"""
     # Validate activity exists
-    if activity_name not in activities:# Validate student is not already signed up
-        if email in activities[activity_name]["participants"]:
+    if activity_name not in activities:
         raise HTTPException(status_code=404, detail="Activity not found")
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up")
 
     # Add student
     activity["participants"].append(email)
