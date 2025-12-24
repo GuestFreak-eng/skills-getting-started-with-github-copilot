@@ -3,6 +3,7 @@
   "image": "mcr.microsoft.com/vscode/devcontainers/python:3.13",
   "forwardPorts": [8000],
   "postCreateCommand": "pip install -r requirements.txt",
+  "postStartCommand": "bash fix-git-config.sh",
   "customizations": {
     "vscode": {
       "extensions": [
